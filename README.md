@@ -1,7 +1,7 @@
-# project-submission
-This repository is for submiting project codes of CSE574-Spring 2020. Please follow the submission instructions below to submit your project codes.
+# CSE_574 Semester Project
 
-- Step 1: Search `CSE574Spring2020/project-submission`, then click 'Fork' on the topright corner.
-- Step 2: New pull request (Base fork:Your/Base:master <— Head Fork: CSE574Spring2020's/Compare: master). Note that you may need to *1) switch the base for your comparison*, *2) compare across forks*, *3) creat pull request*, *4) merge pull request*, *5) confirm merge*. This step is important which merges this repository to your own's.
-- Step 3: Upload your codes to your own repository.
-- Step 4: Pull request (Base fork: CSE574Spring2020's/Base: **Your own brunch** <— Head Fork: Your own/Compare: Master). Please make sure that you upload to **Your own brunch** as the base fork. We have create a unique branch for each group， which is prefixed with the name of your TA. If you do not find your group's branch. please ask your TA to create one. Please note that you will get **0 points** if we don't find codes on your own branch.
+Image Classification of flower images using dataset from https://github.com/SAR2652/Flowers-Recognition/blob/master/flowers.ipynb
+
+**PROJ_SVM.ipynb** - SVM and linear regression on a small subset of the dataset (*flowers.zip* & *tes.csv*) for Balloon Flower and Bird of Paradise.
+
+**Larger_subset.ipynb** - SVM on larger subset of the dataset (*fleur_set.zip*) containg the Balloon Flower, Bird of Paradise, Pink Primrose, Common Dandelion, and King Protea from the dataset. 
