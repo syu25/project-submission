@@ -8,7 +8,7 @@ Image Classification of flower images using dataset from https://github.com/SAR2
 
 **Flower Recognition - CNN.ipynb** - CNN Fine-tuned VGG 16 model using subset of dataset (*CNN flowers dataset.zip*) for only the Balloon Flower and Bird of Paradise. 
 
-**CNN flowers dataset.zip** - Should be downloaded along with *Flower Recognition - CNN.ipynb* and extract and place in the same directory.
+**CNN flowers dataset.zip** - Should be downloaded along with *Flower Recognition - CNN.ipynb* and extract and place in the same directory. input_predict folder is folder where store image to classify.
 
 Plot confusion matrix function using from scikit-learn.org https://scikit-learn.org/0.18/auto_examples/model_selection/plot_confusion_matrix.html
 
