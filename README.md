@@ -1,7 +1,19 @@
-# project-submission
-This repository is for submiting project codes of CSE574-Spring 2020. Please follow the submission instructions below to submit your project codes.
+# CSE_574 Semester Project
 
-- Step 1: Search `CSE574Spring2020/project-submission`, then click 'Fork' on the topright corner.
-- Step 2: New pull request (Base fork:Your/Base:master <— Head Fork: CSE574Spring2020's/Compare: master). Note that you may need to *1) switch the base for your comparison*, *2) compare across forks*, *3) creat pull request*, *4) merge pull request*, *5) confirm merge*. This step is important which merges this repository to your own's.
-- Step 3: Upload your codes to your own repository.
-- Step 4: Pull request (Base fork: CSE574Spring2020's/Base: **Your own brunch** <— Head Fork: Your own/Compare: Master). Please make sure that you upload to **Your own brunch** as the base fork. We have create a unique branch for each group， which is prefixed with the name of your TA. If you do not find your group's branch. please ask your TA to create one. Please note that you will get **0 points** if we don't find codes on your own branch.
+Image Classification of flower images using dataset from https://github.com/SAR2652/Flowers-Recognition/blob/master/flowers.ipynb
+
+**PROJ_SVM.ipynb** - SVM and linear regression on a small subset of the dataset (*flowers.zip* & *tes.csv*) for Balloon Flower and Bird of Paradise.
+
+**Larger_subset.ipynb** - SVM on larger subset of the dataset (*fleur_set.csv*) containg the Balloon Flower, Bird of Paradise, Pink Primrose, Common Dandelion, and King Protea from the dataset. 
+
+**Flower Recognition - CNN.ipynb** - CNN Fine-tuned VGG 16 model using subset of dataset (*CNN flowers dataset.zip*) for only the Balloon Flower and Bird of Paradise. 
+
+**CNN flowers dataset.zip** - Should be downloaded along with *Flower Recognition - CNN.ipynb* and extract and place in the same directory. input_predict folder is folder where store image to classify.
+
+Plot confusion matrix function using from scikit-learn.org https://scikit-learn.org/0.18/auto_examples/model_selection/plot_confusion_matrix.html
+
+Keras' preprocessing image inspired from machinelearningmastery.com https://machinelearningmastery.com/use-pre-trained-vgg-model-classify-objects-photographs/
+
+Plots image with labels function borrowed from smileservices's utils.py https://github.com/smileservices/keras_utils/blob/master/utils.py
+
+Main process of vgg16: youtube channel deeplizard: https://www.youtube.com/watch?v=LhEMXbjGV_4&list=PLZbbT5o_s2xrwRnXk_yCPtnqqo4_u2YGL&index=10
