@@ -1,8 +1,7 @@
 # CSE474/CDA511 Introduction to Machine Learning
-Semester Project
+# Semester Project
 
-Project details:
-Project name: Factors Affecting Accident Severity and Prediction of Severity
+## Project name: Factors Affecting Accident Severity and Prediction of Severity
 
 Group Member: 
 - Jin Chen,    jchen297@buffalo.edu, 50200769
