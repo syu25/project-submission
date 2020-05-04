@@ -15,26 +15,12 @@ with open(file, 'r') as dataset:
     for row in lines:
         rows.append(row)
 rows = np.array(rows)
-#print(fields)
-#print(rows[:][0])
-# print(rows[0:2,0])
 x_train, y_train = np.float32(rows[:,1:])/255,rows[:,0]
 x_valid, y_valid = x_train[:5000], y_train[:5000]
 x_train, y_train = x_train[5000:], y_train[5000:]
 print(y_train[0:10])
 print(x_train[0:10])
-# print(type(x_train[0]))
-# print(type(x_train[0].reshape(28,28)))
 print(x_train[0].reshape(28,28).shape)
-#plt.imshow(np.float32(x_train[0].reshape(28,28)),cmap=plt.cm.Greys)
-#plt.show()
-
-
-
-
-
-
-
 #loss: 0.1806 - accuracy: 0.9324 - val_loss: 0.2203 - val_accuracy: 0.9218 Test accuracy: 0.9229999780654907
 
 file = "fashion-mnist_test.csv"
@@ -48,9 +34,8 @@ with open(file, 'r') as dataset:
         rows.append(row)
 rows = np.array(rows)
 
+# preprocessing
 x_test,y_test = np.float32(rows[:,1:])/255,rows[:,0]
-
-
 x_train = x_train.reshape(x_train.shape[0],28,28,1)
 x_valid = x_valid.reshape(x_valid.shape[0],28,28,1)
 x_test = x_test.reshape(x_test.shape[0],28,28,1)
@@ -72,10 +57,7 @@ fashion_mnist_labels = ["T-shirt/top",  # index 0
 
 model = tf.keras.Sequential()
 model.add(tf.keras.layers.Conv2D(filters=32, kernel_size=3,activation='relu', padding='valid', input_shape=(28,28,1)))
-#model.add(tf.keras.layers.LeakyReLU(alpha=.1))
 model.add(tf.keras.layers.MaxPooling2D(pool_size=2))
-#model.add(tf.keras.layers.Conv2D(filters=32, kernel_size=2, padding='valid', activation='relu'))
-#model.add(tf.keras.layers.MaxPooling2D(pool_size=2))
 model.add(tf.keras.layers.Dropout(.5))
 model.add(tf.keras.layers.Flatten())
 model.add(tf.keras.layers.Dense(128, activation='relu'))
@@ -101,28 +83,18 @@ print('\n', 'Test accuracy:', score[1])
 
 
 
+# displays confusion matrix
 y_hat = model.predict(x_test)
-
 print("y_test shape",y_test.shape)
 print("y_hat shape",y_hat.shape)
 confusion = tf.math.confusion_matrix(np.argmax(y_test,1),np.argmax(y_hat,1))
 plt.imshow(np.float32(confusion),cmap=plt.cm.Greys)
 plt.show()
 
-# Plot a random sample of 10 test images, their predicted labels and ground truth
-# figure = plt.figure(figsize=(20, 8))
-# for i, index in enumerate(np.random.choice(x_test.shape[0], size=15, replace=False)):
-#     ax = figure.add_subplot(3, 5, i + 1, xticks=[], yticks=[])
-#     # Display each image
-#     ax.imshow(np.squeeze(x_test[index]))
-#     predict_index = np.argmax(y_hat[index])
-#     true_index = np.argmax(y_test[index])
-#     # Set the title for each image
-#     ax.set_title("{} ({})".format(fashion_mnist_labels[predict_index],
-#                                   fashion_mnist_labels[true_index]),
-#                                   color=("green" if predict_index == true_index else "red"))
-# plt.show()
 
+
+# displays list of first 20 test samples from least accurate class
+# then displays the first 20 of that class that were guessed incorrectly
 confusion_diag = np.diagonal(confusion)
 most_confused = np.argmin(confusion_diag)
 confused_indices = [i if np.argmax(x)==most_confused else None for i,x in enumerate(y_test)]
@@ -135,6 +107,8 @@ doesnt_know = doesnt_know[doesnt_know!=None]
 print(doesnt_know[:20])
 
 
+
+# interactive testing/UI
 window = tk.Tk()
 window.title("Interactive Testing")
 lbl = tk.Label(window, text="Pick a test sample (0-9,999)")
@@ -184,6 +158,8 @@ canvas.create_image(3,3, anchor="nw", image=img)
 window.mainloop()
 
 
+
+# change done to False to run without tkinter and PIL
 done = True
 while not done:
     print("Type a number (0-9,999): ",end="")
