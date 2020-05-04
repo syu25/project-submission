@@ -33,9 +33,9 @@ with open(file, 'r') as dataset:
     for row in lines:
         rows.append(row)
 rows = np.array(rows)
+x_test,y_test = np.float32(rows[:,1:])/255,rows[:,0]
 
 # preprocessing
-x_test,y_test = np.float32(rows[:,1:])/255,rows[:,0]
 x_train = x_train.reshape(x_train.shape[0],28,28,1)
 x_valid = x_valid.reshape(x_valid.shape[0],28,28,1)
 x_test = x_test.reshape(x_test.shape[0],28,28,1)
