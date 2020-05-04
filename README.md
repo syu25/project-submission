@@ -1,7 +1,7 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><title>Petfinder.md</title><style></style></head><body id="preview">
 <h1 class="code-line" data-line-start=0 data-line-end=1><a id="Petfinder_User_Interface_0"></a>Petfinder User Interface</h1>
 <p class="has-line-data" data-line-start="2" data-line-end="3"><a href="https://www.petfinder.my/"><img src="https://www.petfinder.my/favicon.png" alt="Petfinder"></a></p>
-<p class="has-line-data" data-line-start="4" data-line-end="5">In the zip file, one can find files related to this project.</p>
+<p class="has-line-data" data-line-start="4" data-line-end="5">Please download all zip files. In the zip file, one can find files related to this project.</p>
 <p class="has-line-data" data-line-start="6" data-line-end="7">We separated our project code and our user interface. User do not need to run the model before running the model code again.</p>
 <h1 class="code-line" data-line-start=8 data-line-end=9><a id="Guideline_of_using_this_Interface_8"></a>Guideline of using this Interface</h1>
 <p class="has-line-data" data-line-start="10" data-line-end="12">Requirement:<br>
