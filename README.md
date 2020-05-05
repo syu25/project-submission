@@ -34,6 +34,6 @@ For the Above datasets following data processing was done:
   
 ### Run Demo
 
-Change directory to demo-object-detection
+Change directory to demo-object-detection and run:
 
 `streamlit run app.py `
