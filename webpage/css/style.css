@@ -1,0 +1,155 @@
+.container h1{
+	padding-left:300px;
+	padding-bottom:25px;
+	
+}
+.inner h3{
+	color:blue;
+	padding-left:300px;
+}
+
+.inner p{
+	font-size:14px;
+	font-style:bold;
+	padding-left:300px;
+}
+
+.heat-map img{
+    margin-top: 40px;
+}
+
+.inner2 h3{
+	margin-top:30px;
+	color:blue;
+	padding-left:370px;
+}
+
+.inner3 p{
+	font-size:14px;
+	font-style:bold;
+	padding-left:300px;
+}
+.inner3 h3{
+	margin-top:30px;
+	color:blue;
+	padding-left:477px;
+}
+
+.inner2 p{
+	font-size:14px;
+	font-style:bold;
+	padding-left:300px;
+}
+.inner4 p{
+	font-size:14px;
+	font-style:bold;
+	padding-left:300px;
+}
+.inner4 h3{
+	margin-top:30px;
+	color:blue;
+	padding-left:477px;
+}
+
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 20%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  margin-left:450px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+.collapsible2 {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 20%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  margin-left:450px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible2:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content2 {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+.collapsible3 {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 20%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  margin-left:450px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible3:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content3 {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+
+.collapsible4 {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 20%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  margin-left:450px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible4:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content4 {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
