@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Machine Learning</title>
+    </head>
+    <body style="background-color:indianred">
+        <div style="height: 100%; width: 30%; float: left;">
+            <h1>Linear Regression</h1>
+            <form method="POST" action="{% url 'home:index' %}">
+                {% csrf_token %}
+                <label>Start Date: </label>
+                <br>
+                <input type="number" name="start_date">
+                <br>
+                <br>
+                <label>Duration: </label>
+                <br>
+                <input type="number" name="duration">
+                <br>
+                <br>
+                <input name="generate_image" type="submit" value="Generate Scatter Plot">
+            </form>
+            <br>
+            <p>Description: We use the fantasy premier league dataset to predict the top ten players of the upcoming week based
+                on data from the previous weeks. Enter in the start week number and duration is the number of weeks to train the data.
+                We'll then get the scatter plot and some more results on our predictions.
+            </p>
+            <p>
+                Authors: Hannah Wlasowicz, Nick Kobis, Sriniketh Varma Dasarraju
+            </p>
+        </div>
+        <div style="height: 100%; width: 70%; float: left;">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+        <!-- <img src="{% url 'home:showimage' %}" alt=""> -->
+    </body>
+</html>
