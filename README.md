@@ -31,3 +31,9 @@ For the Above datasets following data processing was done:
   - Use openwaymo dataset apis to perform cleaning.
   - Collect Labels and generate bounding boxes.
   - Use front camera images and labels to compile the dataset
+  
+### Run Demo
+
+Change directory to demo-object-detection
+
+`streamlit run app.py `
