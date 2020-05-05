@@ -1,0 +1,32 @@
+#:kivy 1.11.0
+SpotifyScreen:
+    id: purge
+    name: 'Purge Data'
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: False
+
+        AnchorLayout:
+            size_hint_y: None
+            height: content.height
+            minimum_width: '60dp'
+            
+            GridLayout:
+                id: content
+                cols: 1
+                spacing: '8dp'
+                padding: '8dp'
+                size_hint: (.8, None)
+                height: self.minimum_height
+
+    Label:
+        size_hint_y: None
+        text: 'Clicking the button below will remove all saved data. Note that this action is irreversible.'
+    Button:
+        size_hint_y: None
+        height: '96dp'
+        width: '200dp'
+        background_color: 1, 0, 0, 1
+        text: 'Purge All Data'
+        on_press: app.try_purge()
+        disabled: app.stats['scraping']
