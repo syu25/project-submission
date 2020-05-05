@@ -5,8 +5,8 @@ from kivy.app import App
 from database import SpotifyDB
 
 MAX_SEARCH_RESULTS = 2000
-CLIENT_ID = 'f8b1263cb3944a73a009b5fb9f46e89c'
-CLIENT_SECRET = '349ae60841404d0e8a012fdff0c4efa3'
+CLIENT_ID = 'ENTER CLIENT ID'
+CLIENT_SECRET = 'ENTER CLIENT SECRET'
 
 default_audio_features = {
     'danceability': None,
