@@ -1,0 +1,5 @@
+Github will not let me upload the datasets I used for this project because they were too big, but the download link for them is 
+
+https://www.kaggle.com/cdc/mortality
+
+and the JSON and csv files in the datasets are just placed into the datasets folder
