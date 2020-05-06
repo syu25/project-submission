@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html>
+<title>Fish Finder</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+<style>
+
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+
+.bgimg {
+  background-image: url('https://garibaldicharters.com/wp-content/uploads/2016/07/water-background.jpg');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+
+.boxed {
+  width: 300px;
+  background: rgba(50,50 ,75, 0.7);
+  border-radius: 5px;
+  padding: 50px;
+  margin: 20px;
+}
+</style>
+<body>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+
+  <!--Title block-->
+  <div class="w3-display-middle">
+    <h1 class="w3-jumbo w3-animate-top">Fish Finder</h1>
+    <hr class="w3-border-white" style="margin:auto;width:60%">
+    <br>
+
+    <!--submit form block-->
+    <div class="boxed">
+      <form method="post" action="/" enctype="multipart/form-data">
+	      <dl>
+	  		<p>
+	  			<input type="file" name="file" autocomplete="off" required>
+	  		</p>
+	      </dl>
+	      <p>
+	  		<input type="submit" value="Submit">
+			<p> {{ variable }} </p>
+      
+	  	  </p>
+
+		</form>
+    </div>
+
+
+
+
+  </div>
+
+  <div class="w3-display-bottomleft w3-padding-large w3-xlarge w3-text-white">
+      Sean Mackay, Benjamin Conomos, Justin Henderson
+  </div>
+</div>
+
+</body>
+</html>
