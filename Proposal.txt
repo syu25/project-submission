@@ -1,0 +1,18 @@
+HEALTHCARE PROVIDER FRAUD DETECTION ANALYSIS
+
+Names:- Siddharth Satyakam
+Email_ids:- s59@buffalo.edu
+UB_Person_Ids:- 50293092
+
+In developed nations, where every medical procedure starting from the regular checkup to surgery is done based on the the helthcare covers opted by individuals from different helthcare providers. The Provider Frauds have become a major concern .According to the governments the total medicare spendings have grown exponentially because of the frauds in Medicare Claims where all the providers, physicians and benficiaries profit by making false claims and getting them approved.The reason are the loopholes in the procedures that are not visible with the narrow perspective that we get at a particular stage of approval. Hence by Rigorous analysis of Medicare data of beneficiaries and various aspects of claim, collected at every stage we will get a more holistic idea.
+
+Generally Frauds adopt ways in which an ambiguous diagnosis codes, Insurace reimbursement costs, Health Care conditions, procedures is used to commit frauds. Medicare aids provided are the most vulnerable welfare initiatives impacted due to these bad practices. Due to this reason, there have been large increase in premiums and healthcare spendings owing to the same.
+
+
+The goal of this project is to " predict the potentially fraudulent claimss " based on the claims filed by providers.along with this, we will also discover important variables helpful in detecting the behaviour of potentially fraud providers. and we will study fraudulent patterns in the provider's claims to understand the future behaviour of providers.
+
+Tasks in this project will be:
+1> For this we will be using the data collected from the "https://www.kaggle.com/rohitrox/healthcare-provider-fraud-detection-analysis" and other sites like cms.data find the patterns, in teh variables and the model that best describes the behaviour of the fraud claims.
+2> Cleaning of the Data and modelling using ski-kitlearn, pandas, numpy and other extensions that would be used during the modelling
+3> Making a dashboard: For this we sill be using various Java Server pages and many sites like tableu for vizualization and display, and will also be able to make predictions based on any new data provided.
+

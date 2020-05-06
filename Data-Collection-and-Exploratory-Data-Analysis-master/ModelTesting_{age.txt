@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RELATION_DESCRIPTORS</title>
+    <script>
+        function RelationDisplay() { 
+            var x = document.getElementById('selectionlist').value; 
+            var el1 = document.getElementById('myIFrame');
+            el1.src = x
+        } 
+    </script>
+</head>
+<body>
+    <b>INTERESTING RELATIONS TO VIEW</b>
+    <br>
+    <br>
+    <form>
+      <fieldset>
+            <legend>Insights Frmo Data For Action</legend>
+            <p>
+               <label>RELATION TO VIEW</label>
+               <select id = "selectionlist" default="Select_option" onchange="RelationDisplay()">
+                 <option value = "DemoPage.html">HeatMap</option>
+                 <option value = "Provider_PotentialFraudp.html">Provider-PotentialFraud</option>
+                 <option value = ".html">AttendingPhysician-PotentialFraud</option>
+                 <option value = "nyt_Immigrantw.html">OperatingingPhysician-PotentialFraud</option>
+                 <option value = "nyt_mexicow.html">InscClaimAmtReimbursed-PotentialFraud</option>
+                 <option value = "nytw.html">IPAnnualReimbursementAmt-PotentialFraud</option>
+                 <option value = "tw_BuildWallw.html">IPAnnualDeductibleAmt-PotentialFraud/option>
+                 <option value = "tw_FinishWallw.html">ChroniCond_Alzehimer-PotentialFraud</option>
+                 <option value = "tw_Immigrantw.html">ChroniCond_ObstrPulmonary-PotentialFraud</option>
+                 <option value = "twitterw.html">IPAnnualReimbursementAmt-RenalDiseaseIndicator</option>
+                 <option value = "BorderWall.html">IPAnnualReimbursementAmt-ChronicCond_HeartFailure</option>
+                 <option value = "tw_FinishWallw.html">IPAnnualReimbursementAmt-Duration_Of_Stay</option>
+                 <option value = "tw_Immigrantw.html">IPAnnualReimbursementAmt-ClmProcedureCode_2</option>
+                 <option value = "tw_mexicow.html">InscClaimAmtReimbursed-AttendingPhysician</option>
+                 <option value = "twitterw.html">InscClaimAmtReimbursed-ChroniCond_KidneyDisease</option>
+                 <option value = "BorderWall.html">IPAnnualReimbursementAmt-ChroniCond_stroke</option>
+                                  
+               </select>
+            </p>
+      </fieldset>
+    </form>  
+    <br>
+    <br>
+    <iframe id="myIFrame"  width="14000px" height="15000px" frameborder="1" scrolling="auto"></iframe>
+</body>
+</html>
