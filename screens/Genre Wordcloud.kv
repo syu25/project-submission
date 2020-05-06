@@ -1,0 +1,34 @@
+#:kivy 1.11.0
+SpotifyScreen:
+    name: 'Genre Wordcloud'
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: False
+
+        AnchorLayout:
+            size_hint_y: None
+            height: content.height
+            minimum_width: '60dp'
+            
+            GridLayout:
+                id: content
+                cols: 1
+                spacing: '8dp'
+                padding: '8dp'
+                size_hint: (.8, None)
+                height: self.minimum_height
+    Button:
+        disabled: app.wordcloud_disabled or app.stats['scraping']
+        size_hint_y: None
+        size_hint_x: .8
+        height: '48dp'
+        text: 'Generate Genre Wordcloud'
+        on_press: app.generate_wordcloud()
+
+    Image:
+        id: wordcloud
+        size_hint_y: None
+        mipmap: True
+        source: app.wordcloud_source
+        size: self.texture_size[0], min(self.texture_size[1], 450)
+        anim_delay: 0.03

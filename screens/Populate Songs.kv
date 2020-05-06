@@ -1,0 +1,98 @@
+#:kivy 1.11.0
+SpotifyScreen:
+    id: songs
+    name: 'Populate Songs'
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: False
+
+        AnchorLayout:
+            size_hint_y: None
+            height: content.height
+            minimum_width: '60dp'
+            
+            GridLayout:
+                id: content
+                cols: 1
+                spacing: '8dp'
+                padding: '8dp'
+                size_hint: (.8, None)
+                height: self.minimum_height
+
+    Label:
+        size_hint_y: None
+        size: [40, 40]
+        #padding
+    BoxLayout:
+        orientation: 'horizontal'
+        height: '32dp'
+        TextInput:
+            id: search_term
+            size_hint_y: None
+            multiline: False
+            height: '32dp'
+            hint_text: 'Enter a search term or leave this blank to scrape all songs...'
+            selection_color: [.517, .741, 0, .4]
+            disabled: app.stats['has_query']
+
+        TextInput:
+            id: year
+            input_type: 'number'
+            size_hint_y: None
+            size_hint_x: .2
+            multiline: False
+            width: '10dp'
+            height: '32dp'
+            hint_text: 'Year'
+            selection_color: [.517, .741, 0, .4]
+            disabled: app.stats['has_query']
+
+    ToggleButton:
+        size_hint_y: None
+        height: '48dp'
+        state: 'down' if app.stats['scraping'] else 'normal'
+        text: 'Populate The Database' if not app.stats['scraping'] else 'Pause The Search'
+        on_press: app.toggle_scraper(search_term.text, year.text)
+
+    ScrollView:
+        id: query_info
+        size_hint_y: None
+        height: 0
+        padding_y: '10dp'
+        Button:
+            size_hint_y: None
+            height: '48dp'
+            text: 'Reset Search Term'
+            disabled: app.stats['scraping']
+            on_press: app.reset_search()
+    Label:
+        #padding
+    GridLayout:
+        cols: 1
+        Label:
+            size_hint_y: None
+            size: self.texture_size
+            markup: True
+            text: '[size=20]Database Statistics[/size]'
+
+        Label:
+            size_hint_y: None
+            size: [40, 80]
+            markup: True
+            text: '[size=40]{} [color=#1db954]Songs[/color][/size]'.format(app.stats['song_count'])
+        Label:
+            size_hint_y: None
+            size: [40, 80]
+            markup: True
+            text: '[size=40]{} [color=#1db954]Titles[/color][/size]'.format(app.stats['song_title_count'])
+        Label:
+            size_hint_y: None
+            size: [40, 80]
+            markup: True
+            text: '[size=40]{} [color=#1db954]Albums[/color][/size]'.format(app.stats['album_count'])
+        Label:
+            size_hint_y: None
+            size: [40, 80]
+            markup: True
+            text: '[size=40]{} [color=#1db954]Artists[/color][/size]'.format(app.stats['artist_count'])

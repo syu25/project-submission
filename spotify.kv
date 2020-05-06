@@ -1,0 +1,34 @@
+#:kivy 1.11.0
+
+BoxLayout:
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgb: 0, 0, 0
+        Rectangle:
+            size: self.size
+
+    ActionBar:
+
+        ActionView:
+            id: av
+            ActionPrevious:
+                markup: True
+                title: '[font=Roboto]{}[/font]'.format(app.current_title)
+                app_icon: 'data/icons/spotify.png'
+                with_previous: False
+
+            ActionButton:
+                text: 'Previous'
+                icon: 'data/icons/chevron-left.png'
+                on_release: app.prev_screen()
+                important: True
+
+            ActionButton:
+                text: 'Next'
+                icon: 'data/icons/chevron-right.png'
+                on_release: app.next_screen()
+                important: True
+
+    ScreenManager:
+        id: sm
