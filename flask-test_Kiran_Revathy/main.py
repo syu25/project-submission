@@ -262,7 +262,7 @@ def input():
       #  df_revenue_data = df_revenue_data.dropna()
       #  print(df_revenue_data.shape)
 
-        return redirect(url_for('result', min_budget= min_budget, max_budget= max_budget, min_profit= min_profit,max_profit=max_profit,max_gross= max_gross, min_gross=min_gross))
+        return redirect(url_for('result', min_budget= min_budget, max_budget= max_budget, min_profit= min_profit,max_profit=max_profit,max_gross= max_gross, min_gross=min_gross, ARI=ARI))
 
     
     return render_template('input.html')
@@ -428,9 +428,9 @@ def visualizationf4():
 #   return f"<p1>Minimum Budget</p1><h1>{min_budget}</h1>&emsp;<p2>Maximum budget</p2><h2>{max_budget}</h2>&emsp;<p3>Minimum profit</p3><h3>{min_profit}</h3>&emsp;<p4>Maximum profit</p4><h4>{max_profit}</h4>"
 
 
-@app.route("/<min_budget>&emsp;&emsp;<max_budget>&emsp;&emsp;<min_profit>&emsp;&emsp;<max_profit>&emsp;&emsp;<min_gross>&emsp;&emsp;<max_gross>")
-def result(min_budget,max_budget, min_profit, max_profit,min_gross,max_gross):
-   return f"<table><tr><th>Minimum budget</th>&emsp;&emsp;<th>Maximum budget</th>&emsp;&emsp;<th>Minimum profit</th>&emsp;&emsp;<th>Maximum profit</th>&emsp;&emsp;<th>Minimum gross</th>&emsp;&emsp;<th>Maximum gross</th></tr><tr><td>{min_budget}</td>&emsp;&emsp;<td>{max_budget}</td>&emsp;&emsp;<td>{min_profit}</td>&emsp;&emsp;<td>{max_profit}&emsp;&emsp;<td>{min_gross}</td>&emsp;&emsp;<td>{max_gross}</td></tr></table>"
+@app.route("/<min_budget>&emsp;&emsp;<max_budget>&emsp;&emsp;<min_profit>&emsp;&emsp;<max_profit>&emsp;&emsp;<min_gross>&emsp;&emsp;<max_gross>&emsp;&emsp;<ARI>")
+def result(min_budget,max_budget, min_profit, max_profit,min_gross,max_gross,ARI):
+   return f"<table><tr><th>Minimum budget</th>&emsp;&emsp;<th>Maximum budget</th>&emsp;&emsp;<th>Minimum profit</th>&emsp;&emsp;<th>Maximum profit</th>&emsp;&emsp;<th>Minimum gross</th>&emsp;&emsp;<th>Maximum gross</th>&emsp;&emsp;<th>Adjusted Rand Index of the model</th></tr><tr><td>{min_budget}</td>&emsp;&emsp;<td>{max_budget}</td>&emsp;&emsp;<td>{min_profit}</td>&emsp;&emsp;<td>{max_profit}&emsp;&emsp;<td>{min_gross}</td>&emsp;&emsp;<td>{max_gross}</td>&emsp;&emsp;<td>{ARI}</td></tr></table>"
 
 #@app.route('/result')
 #def result(min_budget,max_budget, min_profit, max_profit):
