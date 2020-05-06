@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CSE 474 Visualizations</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+  
+<div class="container"> 
+    <h1> CSE 474 Project Visualization </h1>   
+		<div class="heat-map">
+            <div class="inner">
+			<h3> Heat Map of Correlation Coefficient of Features </h3>
+			<p> From our data, there were 17 features that were considered as part of the heatmap.<br> The heatmap potrays how tightly related is one feature with every other feature.<br>The closer the value is to 1, it means that the correlation is very high.</p>
+			<button type="button" class="collapsible">Heat Map</button>
+			<div class="content">
+			<img id="loadingImage" src="images/cc_image.png" />
+			</div>
+		</div>
+		<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+		<div class="inner2">
+			<h3> Graph of Treatment Sought with respect to Age </h3>
+			<p>The two features taken into consideration for this graph was age and if an individual<br> would sought treatment.The diagram on the left is when an individual did not sought<br> treatment while the diagram on the right is when an individual would sought treatment.</p>
+			<button type="button" class="collapsible2">Click to View Graph</button>
+			<div class="content2">
+			<img id="loadingImage2" src="images/graph.png" />
+			</div>
+<script>
+var coll = document.getElementsByClassName("collapsible2");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+	</div>
+			<div class="inner3">
+			<h3> Feature Importance </h3>
+			<p>We used extra trees classifier method to obtain the top features that would help determine<br> if a given individual has mental illness. </p>
+			<button type="button" class="collapsible3">Click to View Graph</button>
+			<div class="content3">
+			<img id="loadingImage3" src="images/fea_imp.png" />
+			</div>
+<script>
+var coll = document.getElementsByClassName("collapsible3");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+	</div>
+			<div class="inner4">
+			<h3> Confusion Matrix </h3>
+			<p>A confusion matrix was developed to evaluate the performance of our model. From the confusion<br>matrix,we would be able to get the values of true positive, true negative, false positive and false<br> negative. From these values, we will be able to calculate the accuracy of our model. </p>
+			<button type="button" class="collapsible4">Click to View Graph</button>
+			<div class="content4">
+			<img id="loadingImage4" src="images/conf_mat.png" />
+			</div>
+<script>
+var coll = document.getElementsByClassName("collapsible4");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+	</div>
+</div>
+</body>
+</html>
