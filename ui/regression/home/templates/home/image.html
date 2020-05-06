@@ -1,0 +1,51 @@
+{% extends "home/index.html" %}
+
+{% block content %}
+    <style>
+        table, th, td {
+        border: 1px solid black;
+        }
+    </style>
+    <h1>Results</h1>
+    <img src="{% url 'home:showimage' %}" alt="">
+    <br>
+    {% if accuracy %}
+        <h4>Average Accuracy: {{ accuracy }}</h4>
+    {% endif %}
+    <br>
+    {% if pred %}
+        <table>
+            <caption>Predicted Players for the week</caption>
+            <tr>
+                <th>Player Name</th>
+                <th>Predicted Points</th>
+                <th>Actual Points</th>
+            </tr>
+            {% for p in pred %}
+                <tr>
+                    {% for v in p %}
+                        <td>{{ v }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    <br>
+    {% if actual %}
+        <table>
+            <caption>Actual Players for the week</caption>
+            <tr>
+                <th>Player Name</th>
+                <th>Predicted Points</th>
+                <th>Actual Points</th>
+            </tr>
+            {% for p in actual %}
+                <tr>
+                    {% for v in p %}
+                        <td>{{ v }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+{% endif %}
+{% endblock %}
