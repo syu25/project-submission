@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Stock time series prediction</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+
+        <h1>DJIA 30 Stock Time Series Analysis</h1>
+
+        <h2>Overview of the data</h2>
+        <div id = 'head1' class=""></div>
+
+        <h2>Summary of the data</h2>
+        <div id = 'desc1' class=""></div>
+
+        <h2>Box plot: open</h2>
+        <img src="assets/plot4.png" alt="">
+
+        <h2>Box plot: close</h2>
+        <img src="assets/plot5.png" alt="">
+
+        <h2>Box plot: low</h2>
+        <img src="assets/plot6.png" alt="">
+
+        <h2>Box plot: high</h2>
+        <img src="assets/plot7.png" alt="">
+
+        <h2>Missing data</h2>
+        <div id = 'null1' class=""></div>
+
+        <h2>After backfilling the missing data</h2>
+        <div id = 'null2' class=""></div>
+
+        <h2>Creating new predictors 'avgPrice' by averaging all prices and 'Growth'</h2>
+        <div id = 'head2' class=""></div>
+
+        <h2>Worst 5 performing stocks of 2017</h2>
+        <div id = 'worst' class=""></div>
+
+        <h2>Historical trend of worst 5 performing stocks</h2>
+        <img src="assets/plot1.png" alt="">
+
+        <h2>Best 5 performing stocks of 2017</h2>
+        <div id = 'best' class=""></div>
+
+        <h2>Historical trend of best 5 performing stocks</h2>
+        <img src="assets/plot2.png" alt="">
+
+        <h2>Correlation plot</h2>
+        <img src="assets/plot3.png" alt="">
+
+        <h2>AMZN average price</h2>
+        <img src="assets/plot8.png" alt="">
+
+        <h2>AMZN - Augmented Dickey-Fuller Test Results autocorrelation</h2>
+        <img src="assets/plot9.png" alt="">
+        <img src="assets/plot10.png" alt="">
+
+        <h2>AMZN - Augmented Dickey-Fuller Test Results partial autocorrelation</h2>
+        <img src="assets/plot11.png" alt="">
+
+        <h2>Arima model</h2>
+        <img src="assets/plot12.png" alt="">
+        <img src="assets/plot13.png" alt="">
+
+
+        <h2>Arima model: prediction</h2>
+        <img src="assets/plot14.png" alt="">
+        <img src="assets/plot15.png" alt="">
+
+        <h2>Arima model Mean absolute percentage error</h2>
+        <h3 id="error1" class=""></h3>
+
+        <h2>Simple LSTM model</h2>
+        <img src="assets/plot17.png" alt="">
+        <img src="assets/plot16.png" alt="">
+
+        <h2>Simple LSTM model: prediction </h2>
+        <img src="assets/plot18.png" alt="">
+
+        <h2>Simple LSTM model Mean absolute percentage error</h2>
+        <h3 id="error2" class=""></h3>
+
+        <h2>Deep NN model </h2>
+        <img src="assets/plot19.png" alt="">
+
+        <h2>Deep NN model: prediction </h2>
+        <img src="assets/plot20.png" alt="">
+
+
+        <h2>Deep NN model Mean absolute percentage error</h2>
+        <h3 id="error3" class=""></h3>
+
+        <h2>Linear regression: prediction </h2>
+        <img src="assets/plot21.png" alt="">
+
+        <h2>Linear regression Mean absolute percentage error</h2>
+        <h3 id="error4" class=""></h3>
+
+        <h2>Random forest model: prediction </h2>
+        <img src="assets/plot22.png" alt="">
+
+        <h2>Random forest model Mean absolute percentage error</h2>
+        <h3 id="error5" class=""></h3>
+
+        <h2>XgBoost model: prediction </h2>
+        <img src="assets/plot23.png" alt="">
+
+        <h2>XgBoost model Mean absolute percentage error</h2>
+        <h3 id="error6" class=""></h3>
+
+
+    </body>
+    <script src="index.js" charset="utf-8"></script>
+</html>
