@@ -1,4 +1,4 @@
-##How To Run Our Project
+## How To Run Our Project
 
 0. Download creditcard.csv from https://www.kaggle.com/aniruddhachoudhury/creditcard-fraud-detection
 + File was too big to push normally
