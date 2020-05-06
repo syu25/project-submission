@@ -1,0 +1,47 @@
+THe biggest Problem faced in the DataSets are Ambigutous Columns as the author of teh biggest dataset that I am working on available in the KAggle has now mentioned the exact descriptions of the labels in the dataset it is becoming extremly difficult to deduce the exact defination of the column values.
+
+Some of the changes still done for a better modelling are:
+
+As there are 54 states and 5 races in the dataset, the only country to have 54 states and 5 races is Africa so we assume the dataset is of the Africa:
+
+DOB -- Fromatted and converted to datetime64 bit format for better analysis
+
+DOD -- Separated the cases where people have died to alive case as the methods used for frauds in both the cases must be           different, so 2 completely different cases for analysis
+
+GENDER, RACE -- Kept constaant as both are having no missing values and are already discretised.
+
+RenalDiseaseIndicator -- Converted all the 'Y' to 1
+
+State and County -- As these both are well discreet and no missing value so no changes.
+
+PartACov - Mediacare Part A cover -- No changes
+PartBCov - Medicare Part B cover --  No changes
+
+Alzimers: For all the columns we are considering:
+		1 = Yes -- As the number of cases are very less
+		2 = No  -- As the number of cases with 2 are very large and everyone cannot have Alzimmer in general
+
+		As in latest stastics it is seen that 1 in 10 people above age 65 have alzimers so with the given 134556 			patients we have 1/10 so close to atleat 13000 as the closest to it is 42026 rather than 92530 we have 				assumed the 1 to be YES ans 2 NO
+
+HeartDisease: As heart disease is a very common consition so we will assume the same assumption as in the Alzimer case.
+		1 = Yes
+		2 = No
+
+Chronic Kidney Disease: In this case, The share of adults 30 and older who have CKD is projected to rise from 13.2 percent 			today to 16.7 percent in 2030, according to a 2015 report in the American Journal of Kidney 					Diseases. So basically from the total population that we are having in our datasets of 138556, all 				are born on or before 1983, so above 30 easily hence our ailing population should be 15.6 to 17.7 				percent of the total population of 138556(i.e. 21,000 to 23,000)
+					In our case the label 1 is more close to the 15-17% mark of total population than 			label 2 which is close to 70% of population. SO we would consider the label 1 as Yes and 2 as NO.
+	
+Cancer: As per the National Cancer Institute, it is seen that Approximately 38.4% of men and women will be diagnosed with 	cancer at some point during their lifetimes (based on 2013–2015 data). So basing on it similarly 38.4% of 138556 is
+	53,205.
+
+Obstruction_Pulmonary: We see according to survey conducted by Rupert Jones in European Respiratory Journal 2018 51: 		       1702562 it is seen that around 17% people face the issue if lung obstruction in Africa primarily due 		       to inhaling bio mass burnt gases,similar trend is seen that Label 1 represents Yes(i.e. 17 percent) 		       and 2 represents NO.
+
+Depression: As we see similar trend in the Depression we keep the data tagging as in previous column consistent i.e.
+	    1 = YES 
+	    2 = NO
+
+ischemic Heart Disease: According to the article "Cardiovascular diseases in Tanzania: The burden of modifiable and 			intermediate risk factors" by Wilfrida P. Roman1, Haikael David Martin1, Elingarami Sauli2 it is 			mentioned that 81% of the population die due to cadio vascular diseases(30% by Ischemic Heart 			Disease in Africa) faced by the African subcontinent.
+				Hence as mentioned in the dataset label 1 represents the best case senario representing the 			same so 1=Yes
+				2=NO
+Osteoporaisis: One of the most least cases of seath in the African Subcontinent hence 1= YES and 2= NO follows here also
+
+Stroke and rheumatoidarthritis: As all the other columns are following the principle of 1=YES and 2-=NO, we will assume the same here 
