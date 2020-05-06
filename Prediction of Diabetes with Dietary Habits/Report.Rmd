@@ -1,0 +1,575 @@
+---
+title: "Prediction of Diabates with Dietary Habits"
+author: "Pin Lyu, Huangwei Ding, Matthew Sah"
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r include = FALSE}
+knitr::opts_chunk$set(echo=TRUE)
+```
+
+## Index
+- [Motivation](#Motivation)<br> 
+- [Methods](#Methods)<br>
+- [Metrics](#Metrics)<br>
+- [Preprocessing](#Preprocessing)<br>
+
+#### 1. Logistic Regression
+- [Logistic Regression](#Logistic-Regression)<br>
+- [Accuracy Plotting For Logistic Regression](#Plot-Logistic-Regression)<br>
+- [F1 Plotting For Logistic Regression](#F1-Logistic-Regression)<br>
+- [AUC Plotting For Logistic Regression](#AUC-Logistic-Regression)<br>
+
+#### 2. Linear Discriminant Analysis
+- [Linear Discriminant Analysis](#LDA)<br>
+- [Accuracy Plotting for LDA](#Accuracy-LDA)<br>
+- [F1 Plotting for LDA](#F1-LDA)<br>
+- [AUC Plotting for LDA](#AUC-LDA)<br>
+
+#### 3. KNN
+- [KNN](#KNN)<br>
+- [Accuracy KNN](#Accuracy-KNN)<br>
+- [F1 Plot KNN](#F1-KNN)<br>
+- [AUC Plot KNN](#AUC-KNN)<br>
+
+#### 4. CART with ROSE
+- [CART Rose](#CART-Rose)<br>
+- [AUC for Rose with CART](#AUC-CART)<br>
+
+#### 5. XGBoost
+- [XGBoost](#XGBoost)<br>
+
+<br>
+<br> 
+
+---
+
+<br>
+<br>
+
+## Motivation{#Motivation}
+Health is a person most important asset; without a healthy body it would bring a lot of inconvenience to his/her daily life, even more so if it's a long term health issue that plagues the patient for years. Dietary management is widely discussed topic in recent years, as health and life standards improve by the years. People have started to put more emphasis on what we consume on a daily basis, let that be for a better posture, to enjoy food better, or to just get a healthier body to support that entity on the long run. Diabetes in particular is a very distinct disease, with its unique characteristics such as being extremely hard to identify, extremely common especially among the more elderly, and being strongly connected with one's dietary lifestyle. <br>
+We focus our attention on the analysis and prediction of diabetes patients and the relevant to their dietary habits. We intend to use machine learning methods to analyze and predict possible victims of the disease. As we understand that diabetes is strongly connected to one's dietary habits, we intend to use one's dietary habits as the main features to discover whether diets really have such correlation with diabetes.
+
+
+<br>
+<br> 
+
+---
+
+<br>
+<br>
+
+
+## Methods{#Methods}
+Data preprocessing is extremely important in our part. Initially we overlooked that our data has unbalanced target class(16:1 False to True ratio) which later became an huge issue whilst trying to come up with a productive model. We went through alot of models that made sense and eventually had to go towards ensemble methods (in our case, CART and XGBoost) to try to resolve this issue. We came across some improvements but was still limited to the data's capabilities. 
+The best single methods and the ensemble method's results are presented later on this page.
+
+
+<br>
+<br> 
+
+---
+
+<br>
+<br>
+
+## Metrics{#Metrics}
+As mentioned, we originally went through a false state of satisfactory, where we were constantly getting accuracies or 90% and above. This is when we decided to take a look into our metrics for evaluation. We figured that a simple hit rate accuracy was not the metric we were looking for considering that the model could basically guess the results to be false and be correct as our data is increadibly imbalanced. We adopted F1 score and using the Area Under Curve(AUC) to determine how viable our model was.
+
+
+
+<br>
+<br> 
+
+---
+
+<br>
+<br>
+
+
+## Preprocessing {#Preprocessing}
+We then proceed to preprocess our data to make it optimal for prediction, steps include oversampling our positive case( ROSE, SMOTE) to our training data and dividing our data into more equally distributed positive cases in our training and test sets to help us verify our accuracy later on. Oversampling helped out our results substantially as overcoming the imbalanced data has played a great part of completing this project for us.
+
+
+```{r, message=FALSE,  warning=FALSE, echo=FALSE}
+
+library(leaps)
+library(MASS)
+library(ROSE)
+library(class)
+library(xgboost)
+library(readr)
+library(stringr)
+library(caret)
+library(pROC)
+library(rpart)
+library(ggplot2)
+library(Ckmeans.1d.dp)
+library(car)
+library(DMwR)
+
+
+setwd("/home/mavericku/Documents/Prediction-of-Diabetes-with-Dietary-Habits/Project")
+load('dataset/preprocessed_dataset.Rdata')
+load('dataset/diet_have.Rdata')
+load('dataset/diet_nothave.Rdata')
+raw_data = dataset
+############ Functions #############
+
+#pre:prediction
+#y:actual
+f1_fun = function(pre, y) {
+  class = sort(unique(y))
+  tp = NA
+  fp = NA
+  fn = NA
+  for (i in 1:length(class)) {
+    tp[i] = sum(pre == class[i] & y == class[i])
+    fp[i] = sum(pre == class[i] & y != class[i])
+    fn[i] = sum(pre != class[i] & y == class[i])
+  }
+  f1 = 2 * tp / (2 * tp + fp + fn)
+  names(f1) = class 
+  return(f1[2])
+}
+ 
+#######Divide train and test
+
+set.seed(123)
+
+train_have <- sample(1:nrow(diet_have), .80 * nrow(diet_have))
+train_nothave <-
+  sample(1:nrow(diet_nothave), .80 * nrow(diet_nothave))
+
+data_train <-
+  rbind(diet_have[train_have,-c(2)], diet_nothave[train_nothave,-c(2)])
+data_test <-
+  rbind(diet_have[-train_have,-c(2)], diet_nothave[-train_nothave,-c(2)])
+
+y_test <- as.numeric(data_test$diab)
+
+
+########### Oversampling data ########################
+
+data.rose <- ROSE(diab ~ ., data = data_train, seed = 1)$data
+data_train$diab <- as.factor(data_train$diab)
+data.smote <- SMOTE(diab ~ ., data = data_train,k = 5, perc.over = 500)
+
+y_train <- as.numeric(data.rose$diab)
+
+
+```
+
+```{r, message=FALSE,  warning=FALSE, echo = FALSE}
+b4_rose <- as.numeric(table(data_train$diab))
+after_rose <- as.numeric(table(data.rose$diab))
+
+labels <- c('Do not have', 'Have')
+
+#graphics.off()
+par(mfrow = c(1,2))
+pie(b4_rose,labels, main = 'Before oversampling with ROSE')
+pie(after_rose,labels, main = 'After oversampling with ROSE')
+```
+
+
+<br>
+<br> 
+
+---
+
+<br>
+<br>
+
+## 1. Logistic Regression{#Logistic-Regression}
+```{r, message=FALSE,  warning=FALSE}
+
+
+################################################################
+########        Logistics Regression                  ##########
+################################################################
+
+########### Deploy forward subset selection ##########
+regfit.for <- regsubsets(diab~. - diab, data = data.rose, nbest = 1, nvmax = 70, method = "forward")
+my_sum <- summary(regfit.for)
+##summary(regfit.for)
+
+select = summary(regfit.for)$outmat
+
+########### calculate error for each iteration
+lr_train_err <- NULL # store training error
+lr_test_err <- NULL  # store test error
+lr_f1_train <- NULL # store training f1 score
+lr_f1_test <- NULL # store testing f1 score
+lr_AUC_train <- NULL
+lr_AUC_test <- NULL
+graphics.off()
+for (i in 1:69) {
+  temp <- which(select[i,] == "*")
+  temp <- temp + 1
+  
+  red.training <- data.rose[, c(1, temp)]
+  red.testing <- data_test[, c(1, temp)]
+  
+  red.fit <-
+    glm(diab ~ . , data = red.training, family = "binomial")
+  
+  pred.train = round(predict(red.fit, newdata = red.training, type = "response"))
+  pred.test = round(predict(red.fit, newdata = red.testing, type = "response"))
+  
+  lr_train_err[i] <-  sum(abs(pred.train - y_train)) / length(y_train)
+  lr_test_err[i]  <-  sum(abs(pred.test - y_test)) / length(y_test)
+  lr_f1_train[i] <- f1_fun(pred.train, y_train)
+  lr_f1_test[i] <- f1_fun(pred.test, y_test)
+  lr_AUC_train[i] <- roc.curve(data.rose$diab, pred.train)$auc
+  lr_AUC_test[i] <- roc.curve(data_test$diab, pred.test)$auc
+  
+}
+#which(lr_train_err==min(lr_train_err)) 
+#which(lr_test_err==min(lr_test_err))
+#which(lr_f1_train==max(lr_f1_train)) 
+```
+
+
+### Logistic Regression Accuracy{#Accuracy-Logistic-Regression}
+```{r }
+############# plot out ##################
+#graphics.off()
+par(mfrow=c(1,2))
+plot(lr_train_err, type="l", 
+     main ="LR Training error - K predictors ", 
+     ylab ="Mean Absolute Error",
+     xlab = "Number of Predictors",
+     xlim = c(0, 69))
+plot(lr_test_err, type="l",
+     main ="LR Test error - K predictors ", 
+     ylab ="Mean Absolute Error",
+     xlab = "Number of Predictors",
+     xlim = c(0, 69))
+
+
+```
+
+
+### Logistic Regression F1 Score{#F1-Logistic-Regression}
+```{r}
+
+#graphics.off()
+par(mfrow=c(1,2))
+plot(lr_f1_train, type="l", 
+     main ="LR Training F1 score - K predictors ", 
+     ylab ="F1-score",
+     xlab = "Number of Predictors",
+     xlim = c(0, 69))
+plot(lr_f1_test, type="l",
+     main ="LR Test F1 score- K predictors ", 
+     ylab ="F1-score",
+     xlab = "Number of Predictors",
+     xlim = c(0, 69))
+```
+
+
+### Logistic Regression AUC Curve{#AUC-Logistic-Regression}
+```{r }
+#graphics.off()
+par(mfrow=c(1,2))
+plot(lr_AUC_train, type="l", 
+     main ="LR Trianing AUC - K predictors ", 
+     ylab ="F1-score",
+     xlab = "Number of Predictors",
+     xlim = c(0, 69))
+plot(lr_AUC_test, type="l", 
+     main ="LR Testing AUC - K predictors ", 
+     ylab ="F1-score",
+     xlab = "Number of Predictors",
+     xlim = c(0, 69))
+  
+```
+
+### F1 Score of Logistic Regression{#F1-Score-Logistic-Regression}
+```{r}
+max(lr_f1_test)
+```
+### AUC Score of Logistic Regression {#AUC-Score-Logistic-Regression} 
+```{r}
+max(lr_AUC_test)
+```
+
+
+
+
+<br>
+<br> 
+
+---
+
+<br>
+<br>
+
+
+##  2. Linear Discriminant Analysis{#LDA}
+```{r, message=FALSE,  warning=FALSE}
+
+lda_train_err <- NULL # store training error
+lda_test_err <- NULL  # store test error
+lda_f1_train <- NULL # store training f1 score
+lda_f1_test <- NULL # store testing f1 score
+lda_AUC_train <- NULL
+lda_AUC_test <- NULL
+
+for (i in 1:69) {
+  temp <- which(select[i,] == "*")
+  temp <- temp + 1
+  
+  red.training <- data.rose[, c(1, temp)]
+  red.testing <- data_test[, c(1, temp)]
+  
+  red.fit <- lda(diab ~., data = red.training)
+  
+  pred.train = predict(red.fit, newdata = red.training, type = "response")
+  pred.test = predict(red.fit, newdata = red.testing, type = "response")
+  
+  y_hat_train <- as.numeric(pred.train$class) -1
+  y_hat_test <- as.numeric(pred.test$class) -1
+  
+  lda_train_err[i] <-  sum(abs(y_hat_train - y_train)) / length(y_train)
+  lda_test_err[i]  <-  sum(abs(y_hat_test - y_test)) / length(y_test)
+  
+  lda_f1_train[i] <- f1_fun(y_hat_train, y_train)
+  lda_f1_test[i] <- f1_fun(y_hat_test, y_test)
+  lda_AUC_train[i] <- roc.curve(data.rose$diab, y_hat_train , plotit = FALSE)$auc
+  lda_AUC_test[i] <- roc.curve(data_test$diab, y_hat_test, plotit = FALSE)$auc
+}
+```
+### Accuracy Linear Discriminant Analysis{#Accuracy-LDA}
+```{r}
+par(mfrow=c(1,2))
+plot(lda_train_err, type="l", 
+     main ="LDA Training error - K predictors(Forward)", 
+     ylab ="Mean Absolute Error",
+     xlab = "Number of Predictors",
+     xlim = c(0, 69))
+plot(lda_test_err, type="l",
+     main ="LDA Test error - K predictors(Forward)", 
+     ylab ="Mean Absolute Error",
+     xlab = "Number of Predictors",
+     xlim = c(0, 69))
+
+```
+
+### F1 Linear Discriminant Analysis{#F1-LDA}
+```{r}
+plot(lda_f1_train, type="l", 
+     main ="LDA training F1 score - K predictor", 
+     ylab ="F1-score",
+     xlab = "Number of Predictors",
+     xlim = c(0, 69))
+plot(lda_f1_test, type="l",
+     main ="LDA Test F1 score- K predictors", 
+     ylab ="F1-score",
+     xlab = "Number of Predictors",
+     xlim = c(0, 69))
+
+```
+
+### AUC Linear Discriminant Analysis{#AUC-LDA}
+```{r}
+plot(lda_AUC_train, type="l", 
+     main ="LDA Training AUC - K predictors(Forward)", 
+     ylab ="F1-score",
+     xlab = "Number of Predictors",
+     xlim = c(0, 69))
+plot(lda_AUC_test, type="l", 
+     main ="LDA Testing AUC - K predictors(Forward)", 
+     ylab ="F1-score",
+     xlab = "Number of Predictors",
+     xlim = c(0, 69))
+```
+
+
+### The F1 Score of LDA
+```{r}
+max(lda_f1_test)
+```
+### The AUC Score of LDA
+```{r}
+
+max(lda_AUC_test)
+```
+
+
+
+<br>
+<br> 
+
+---
+
+<br>
+<br>
+
+## 3. KNN{#KNN}
+```{r, message=FALSE, warning=FALSE}
+knn.train <- data.rose
+train.label <- knn.train$diab
+errors_knn <- c()
+knn_f1 <- NULL
+knn_AUC <- NULL
+test.label <- data_test$diab
+
+
+for (i in c(1:20)){
+  prediction.knn <- knn(knn.train, data_test, train.label, k = i)
+  errors_knn <- c(errors_knn, 1-length(which(test.label == prediction.knn)) / length(test.label))
+  knn_AUC[i] <- roc.curve(data_test$diab, as.numeric(prediction.knn) - 1, plotit = FALSE)$auc
+  knn_f1[i] <- f1_fun(as.numeric(prediction.knn) - 1, data_test$diab)
+}
+
+```
+
+
+### Accuracy KNN{#Accuracy-KNN}
+```{r}
+k = 1:20
+plot(k,errors_knn,type = "l",main="knn errors--number of K",xlab="k values",ylab='k-nn error')
+```
+
+
+### F1 KNN {#F1-KNN}
+```{r}
+plot(k,knn_f1,type = "l",main="knn F1 score--number of K",xlab="k values",ylab='k-nn error')
+
+```
+
+### AUC KNN {#AUC-KNN}
+```{r}
+plot(k,knn_AUC,type = "l",main="knn AUC--number of K",xlab="k values",ylab='k-nn error', ylim = c(0.45, 0.6))
+
+```
+
+
+
+
+<br>
+<br> 
+
+---
+
+<br>
+<br>
+
+## 4. CART With Rose{#CART-Rose}
+```{r}
+
+b4_rose <- as.numeric(table(data_train$diab))
+after_rose <- as.numeric(table(data.rose$diab))
+
+labels <- c('Do not have', 'Have')
+
+#graphics.off()
+par(mfrow = c(1,2))
+pie(b4_rose,labels, main = 'Before oversampling with ROSE')
+pie(after_rose,labels, main = 'After oversampling with ROSE')
+
+
+dt = data.frame(table(data_train$diab))
+
+
+model.control <- rpart.control(minsplit = 5, xval = 10, cp = 0)
+fit <- rpart(diab~., data=data.rose, method = "class", control = model.control)
+# summary(fit)
+#f1_fun(predictions, data_test$diab) 
+#accuracy.meas(data_test$diab, predictions)
+predictions <- predict(fit, data_test, type="class")
+
+ROSE_roc <- roc(as.numeric(data_test$diab), as.numeric(predictions))
+
+
+```
+
+
+
+### AUC Curve using CART{#AUC-CART}
+```{r}
+
+plot(ROSE_roc, print.auc=TRUE, auc.polygon=TRUE, 
+     grid=c(0.1, 0.2),grid.col=c("green", "red"), 
+     max.auc.polygon=TRUE,auc.polygon.col="skyblue", 
+     print.thres=TRUE,main='ROC curve with ROSE')
+```
+
+ 
+### AUC Score
+```{r}
+roc.curve(data_test$diab, predictions)
+```
+
+
+<br>
+<br>
+
+---
+
+<br>
+<br>
+
+## 5. XGBoost {#XGBoost}
+
+```{r}
+
+m_data <- data.matrix(data.rose[, -c(1)], rownames.force = NA)
+y_train <- as.numeric(data.rose$diab)
+
+xgb <- xgboost(data = m_data,label = y_train, max_depth=6, eta=0.5,  
+               objective='binary:logistic', nround=25, verbose = 0)
+
+importance <- xgb.importance(model = xgb)
+#head(importance)
+#graphics.off()
+xgb.ggplot.importance(importance)
+
+```
+
+### F1 Score Table
+```{r}
+m_test <- data.matrix(data_test[, -c(1)])
+
+
+#f1_fun(y_test, pre_xgb)
+pre_xgb = round(predict(xgb, m_test))
+table(y_test, pre_xgb)
+
+```
+
+### Plot ROC Curve
+```{r}
+
+xgboost_roc <- roc(y_test, pre_xgb, quiet = TRUE)
+plot(xgboost_roc, print.auc=TRUE, auc.polygon=TRUE, 
+     grid=c(0.1, 0.2),grid.col=c("green", "red"), 
+     max.auc.polygon=TRUE,auc.polygon.col="skyblue", 
+     print.thres=TRUE,main='ROC curve')
+```
+
+
+<br>
+<br>
+
+---
+
+<br>
+<br>
+
+
+Method  | F1 Score   | AUC
+------------- | -------------   | -------------
+LDA(p = 21, with ROSE) |0.1979 |0.679
+LR(p = 21, with ROSE) |0.1992 |0.682
+LR(p = 42, without ROSE) |0.0196 |0.504
+CART(with ROSE)|0.1355|0.561
+CART(with SMOTE)|0.1212|0.536
+XGBoost|0.1473|0.584
+
+
