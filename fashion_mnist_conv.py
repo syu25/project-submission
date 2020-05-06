@@ -21,7 +21,8 @@ x_train, y_train = x_train[5000:], y_train[5000:]
 print(y_train[0:10])
 print(x_train[0:10])
 print(x_train[0].reshape(28,28).shape)
-#loss: 0.1806 - accuracy: 0.9324 - val_loss: 0.2203 - val_accuracy: 0.9218 Test accuracy: 0.9229999780654907
+#loss: 0.1806 - accuracy: 0.9320 - val_loss: 0.2143 - val_accuracy: 0.9226
+#Test accuracy: 0.9208999872207642
 
 file = "fashion-mnist_test.csv"
 
