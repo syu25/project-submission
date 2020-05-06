@@ -1,9 +1,15 @@
-# project-submission
-This repository is for submiting project codes of CSE574-Spring 2020. Please follow the submission instructions below to submit your project codes.
+## How To Run Our Project
 
-- Step 1: Search `CSE574Spring2020/project-submission`, then click 'Fork' on the topright corner.
-- Step 2 (optional): New pull request (Base fork:Your/Base: **master** <— Head Fork: CSE574Spring2020's/Compare: **master**). Note that you may need to *1) switch the base for your comparison*, *2) compare across forks*, *3) creat pull request*, *4) merge pull request*, *5) confirm merge*. This step is important which merges this repository to your own's. However, it means that there is nothing changed in th master branch when showing nothing to compare. Then you can skip step 2.
-- Step 3: Upload your codes to your own repository.
-- Step 4: Pull request (Base fork: CSE574Spring2020's/Base: **Your-own-brunch** <— Head Fork: Your own/Compare: **Your-own-brunch**). Please make sure that you upload to **Your-own-brunch** as the base fork. 
-
-We have create a unique branch for each group， which is prefixed with the name of your TA. If you do not find your group's branch, please ask your TA to create one. Please note that you will get **0 points** if we don't find codes on your own branch.
+0. Download creditcard.csv from https://www.kaggle.com/aniruddhachoudhury/creditcard-fraud-detection
++ File was too big to push normally
+1. Install Python 3.7+ (64 bit) (From official Python site)
+2. Install required Libraries (use pip, or another python package distributor):
++ Pandas
++ sklearn
++ numpy
++ matplotlib
++ tensorflow
++ seaborn
++ tkinter
+3. Run "gui_runner.py" from the command line.
+4. Choose the model you want to run from the options
